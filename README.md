@@ -117,6 +117,11 @@ params = {
 
 ![Web server is working](doc/example2.png)
 
+### Using Flask server
+
+See [flask_server.py](examples/flask_server.py)
+
+
 ## Full Parameter Reference
 ``` JavaScript
 {
