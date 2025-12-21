@@ -143,6 +143,11 @@
       min-height: 80px;
       resize: vertical;
     }
+
+    .popover {
+      --bs-popover-body-padding-x: 0.7rem !important;
+      --bs-popover-body-padding-y: 0.5rem !important;
+    }
   </style>
 </head>
 
@@ -407,7 +412,8 @@
           <div class="mt-2">
             <div class="input-group input-group-sm">
               <input id="shareLink" class="form-control" readonly />
-              <button type="button" id="btnCopyLink" class="btn btn-outline-secondary">Copy</button>
+              <button type="button" id="btnCopyLink" class="btn btn-outline-secondary" data-bs-toggle="popover"
+                data-bs-placement="top" data-bs-trigger="manual" data-bs-content="Copied">Copy</button>
             </div>
           </div>
 
@@ -439,7 +445,7 @@
   <!-- Modal -->
   <div class="modal fade" id="saveAsDialog" tabindex="-1" aria-labelledby="saveAsDialogLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-fullscreen-lg-down">
-    <!-- <div class="modal-dialog modal-lg modal-dialog-centered"> -->
+      <!-- <div class="modal-dialog modal-lg modal-dialog-centered"> -->
       <div class="modal-content">
 
         <div class="modal-header">
@@ -452,7 +458,7 @@
             <div class="row g-3">
               <!-- Left: List Group -->
               <div class="col-3 d-flex flex-column" style="justify-content: space-between;">
-                <div id ="saveAsDialogTypes" class="list-group" style="text-align: right;">
+                <div id="saveAsDialogTypes" class="list-group" style="text-align: right;">
                   <button type="button" data-type="json" class="list-group-item list-group-item-action active">
                     JSON
                   </button>
@@ -465,7 +471,8 @@
                 </div>
                 <!-- Bottom Buttons -->
                 <div class="d-flex flex-column justify-content-end gap-1">
-                  <button type="button" class="btn btn-success" id="saveAsDialogCopyBtn">
+                  <button type="button" class="btn btn-success" id="saveAsDialogCopyBtn" data-bs-toggle="popover"
+                    data-bs-placement="right" data-bs-trigger="manual" data-bs-content="Copied">
                     Copy
                   </button>
                   <button type="button" class="btn btn-primary" id="saveAsDialogSaveBtn">
@@ -476,7 +483,9 @@
 
               <!-- Right: Main Content -->
               <div class="col-9">
-                <textarea id="saveAsDialogCode" class="form-control" spellcheck="false" style="font-family: monospace; min-height: 500px; height: 100%; font-size: 0.8em;" readonly></textarea>
+                <textarea id="saveAsDialogCode" class="form-control" spellcheck="false"
+                  style="font-family: monospace; min-height: 500px; height: 100%; font-size: 0.8em;"
+                  readonly></textarea>
               </div>
             </div>
           </div>

@@ -8,7 +8,8 @@
 import ejs from 'ejs';
 import templateContent from './template.ejs?raw';
 
-import Modal from 'bootstrap/js/src/modal.js';
+import 'bootstrap/js/src/modal.js';
+import Popover from 'bootstrap/js/src/popover.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { jsCodeGen, jsonCodeGen, pythonCodeGen } from './codegen';
@@ -379,11 +380,15 @@ $('btnOpen').addEventListener('click', (e) => {
 $('btnShare').addEventListener('click', (e) => {
   createShareableLink();
 });
+const shareLinkPopover = new Popover($('btnCopyLink'));
 $('btnCopyLink').addEventListener('click', () => {
   const field = $('shareLink');
   field.select();
   navigator.clipboard.writeText(field.value).then(() => {
-    // No notification required unless you want one
+    shareLinkPopover.show();
+    setTimeout(() => {
+      shareLinkPopover.hide()
+    }, 2000);
   });
 });
 
@@ -459,12 +464,16 @@ document.querySelectorAll('#saveAsDialogTypes button').forEach((element) => {
   element.addEventListener('click', updateSaveAsDialog);
 });
 
+const saveAsDialogCopyPopover = new Popover($('saveAsDialogCopyBtn'));
 $('saveAsDialogCopyBtn').addEventListener('click', (e) => {
   const field = $('saveAsDialogCode');
   field.select();
   // field.setSelectionRange(0, field.value.length);
   navigator.clipboard.writeText(field.value).then(() => {
-    // No notification required unless you want one
+    saveAsDialogCopyPopover.show()
+    setTimeout(() => {
+      saveAsDialogCopyPopover.hide()
+    }, 2000);
   });
 });
 $('saveAsDialogSaveBtn').addEventListener('click', (e) => {
