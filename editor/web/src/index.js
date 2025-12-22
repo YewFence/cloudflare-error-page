@@ -445,7 +445,15 @@ function updateSaveAsDialog(e) {
   }
   const params = { ...lastCfg };
   delete params.time;
-  $('saveAsDialogCode').innerHTML = saveAsContent = codegen.generate(params);
+  if (codegen) {
+    saveAsContent = codegen.generate(params);
+  } else if (saveAsType == 'static') {
+    render() // rerender the page
+    saveAsContent = lastRenderedHtml;
+  } else {
+    throw new Error('unexpected saveAsType=' + saveAsType)
+  }
+  $('saveAsDialogCode').innerHTML = saveAsContent;
   $('saveAsDialogCode').scrollTop = 0;
 
   document.querySelectorAll('#saveAsDialogTypes button').forEach((element) => {
@@ -489,6 +497,10 @@ $('saveAsDialogSaveBtn').addEventListener('click', (e) => {
     case 'python':
       saveName = 'cf_error_page_example.py';
       break;
+    case 'static':
+      saveName = 'cf_error_page.html';
+      break;
+    // TODO: name output files using page title
   }
   saveFile(saveAsContent, saveName);
 });
